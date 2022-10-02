@@ -11,13 +11,6 @@ public class WeatherForecastController : ControllerBase
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
 
-    private readonly ILogger<WeatherForecastController> _logger;
-
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
-    {
-        _logger = logger;
-    }
-
     [HttpGet]
     public IEnumerable<WeatherForecast> Get()
     {
@@ -28,5 +21,16 @@ public class WeatherForecastController : ControllerBase
             Summary = Summaries[Random.Shared.Next(Summaries.Length)]
         })
         .ToArray();
+    }
+
+    [HttpGet("one")]
+    public WeatherForecast GetWeatherForecast()
+    {
+        return new WeatherForecast
+        {
+            Date = DateTime.Now,
+            TemperatureC = 1,
+            Summary = "Freezing"
+        };
     }
 }
